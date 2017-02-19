@@ -14,6 +14,7 @@ const cssnano = require('cssnano');
 const sourcePath = path.join(__dirname, './src');
 const staticsPath = path.join(__dirname, './static');
 
+// CONF
 function main(env) {
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
