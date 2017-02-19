@@ -1,4 +1,4 @@
-- ajouter postcss
+- ajouter postcss (plugins manquants)
 - ajouter rxjs
 - ajouter redux observable
 - afficher l'heure
