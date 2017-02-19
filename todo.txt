@@ -1,0 +1,5 @@
+- ajouter postcss
+- ajouter rxjs
+- ajouter redux observable
+- afficher l'heure
+- ajouter la capture vocale (avec l'image et tout)
