@@ -1,0 +1,45 @@
+# Environment Configuration
+.env
+
+# Build output folders
+dist/
+
+# Logs
+*.log
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+node_modules
+
+# Debug log from npm
+npm-debug.log*
+
+# Default IDE
+.tern-project
+
+# IntelliJ IDE ignore
+.idea
+
+# Sublime Text ignore
+*.sublime-project
+*.sublime-workspace
+
+# Visual Studio Code
+.vs
+.vscode
+.history
+jsconfig.json
+
+# Build caches
+.cache
+.temp
+.happypack
+.babel-cache
+.module-cache
+.webpack-cache
+.tmp
+
+# OS specific
+.DS_Store
+Thumbs.db
+_nogit
