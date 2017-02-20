@@ -1,5 +1,6 @@
-- ajouter postcss (plugins manquants)
+- faire fonctionner postcss
 - ajouter rxjs
 - ajouter redux observable
 - afficher l'heure
 - ajouter la capture vocale (avec l'image et tout)
+https://github.com/jonathantneal/postcss-font-magician

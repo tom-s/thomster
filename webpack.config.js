@@ -4,11 +4,8 @@ const path = require('path');
 const Dashboard = require('webpack-dashboard/dashboard')
 const DashboardPlugin = require('webpack-dashboard/plugin')
 const dashboard = new Dashboard()
-
-// POST CSS
-const assets  = require('postcss-assets');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const getPostCSSConfig = require('./postcss.config')
 
 // PATHS
 const sourcePath = path.join(__dirname, './src');
@@ -18,8 +15,9 @@ const staticsPath = path.join(__dirname, './static');
 function main(env) {
   const nodeEnv = env && env.prod ? 'production' : 'development';
   const isProd = nodeEnv === 'production';
-
+  
   const plugins = [
+    new ExtractTextPlugin("style.css"),
     new DashboardPlugin({
       port: 3000,
       handler: dashboard.setData
@@ -32,16 +30,7 @@ function main(env) {
     new webpack.EnvironmentPlugin({
       NODE_ENV: nodeEnv,
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.LoaderOptionsPlugin({ 
-      options: { 
-        postcss: [ 
-          autoprefixer,
-          cssnano,
-          //cssnext,
-        ]
-      }
-    })
+    new webpack.NamedModulesPlugin()
   ];
 
   if (isProd) {
@@ -49,6 +38,10 @@ function main(env) {
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
+        options: {
+          postcss: getPostCSSConfig({}),
+          context: sourcePath
+        }
       }),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
@@ -70,6 +63,14 @@ function main(env) {
     );
   } else {
     plugins.push(
+      new webpack.LoaderOptionsPlugin({
+        minimize: false,
+        debug: true,
+        options: {
+          postcss: getPostCSSConfig({}),
+          context: sourcePath
+        }
+      }),
       new webpack.HotModuleReplacementPlugin()
     );
   }
@@ -99,11 +100,17 @@ function main(env) {
         },
         {
           test: /\.css$/,
-          use: [
-            'style-loader',
-            { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
-            { loader: 'postcss-loader' },
-          ]
+          loader: ExtractTextPlugin.extract({
+            fallback: "style-loader",
+            use: [
+              {
+                loader: "css-loader",
+              },
+              {
+                loader: "postcss-loader"
+              }
+            ]
+          })
         },
         {
           test: /\.(js|jsx)$/,

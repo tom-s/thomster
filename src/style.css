@@ -1,3 +1,11 @@
+:root {
+  --fontColor: blue;
+}
+
 html, body {
-  color: red;
+  color: var(--fontColor);
+}
+
+:fullscreen a {
+    display: flex
 }
