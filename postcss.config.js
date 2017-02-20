@@ -3,8 +3,8 @@ const PostCSSConfig = function(variables = {}) {
   return [
     require('postcss-import')(),
     require('postcss-assets')(),
-    require('cssnano')(),
-    require('autoprefixer')()
+    require('postcss-cssnext'),
+    require('cssnano')()
   ]
 }
 

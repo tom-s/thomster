@@ -99,12 +99,12 @@ function main(env) {
           },
         },
         {
-          test: /\.css$/,
+          test: /\.(css|pcss)$/,
           loader: ExtractTextPlugin.extract({
             fallback: "style-loader",
             use: [
               {
-                loader: "css-loader",
+                loader: "css-loader"
               },
               {
                 loader: "postcss-loader"
